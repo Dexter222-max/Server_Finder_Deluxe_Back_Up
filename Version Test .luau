@@ -810,7 +810,7 @@ headerFrame.ZIndex = 30
 
 headerFrame.Visible = false
 
-local currentServerTitle = Instance.new("TextLabel", headerFrame)
+currentServerTitle = Instance.new("TextLabel", headerFrame)
 currentServerTitle.Size = UDim2.new(1, -20, 0, 18)
 currentServerTitle.Position = UDim2.new(0, 10, 0, 4)
 currentServerTitle.BackgroundTransparency = 1
@@ -821,7 +821,7 @@ currentServerTitle.TextXAlignment = Enum.TextXAlignment.Left
 currentServerTitle.Text = "Current Server"
 currentServerTitle.ZIndex = 30
 
-local currentServerInfo = Instance.new("TextLabel", headerFrame)
+currentServerInfo = Instance.new("TextLabel", headerFrame)
 currentServerInfo.Size = UDim2.new(1, -20, 0, 55)
 currentServerInfo.Position = UDim2.new(0, 10, 0, 22)
 currentServerInfo.BackgroundTransparency = 1
@@ -834,20 +834,22 @@ currentServerInfo.ZIndex = 30
 currentServerInfo.TextWrapped = true
 
 
-local function safeGetPing()
-    local stats = game:GetService("Stats")
-    local ok, value = pcall(function()
-        local item = stats.Network.ServerStatsItem["Data Ping"]
-        if item and item.GetValue then
-            return item:GetValue()
-        end
-        return 0
-    end)
-    return ok and value or 0
+
+function safeGetPing()
+	local stats, ok, value, item = game:GetService("Stats"), nil, nil, nil
+    ok, value = pcall(function()
+		item = stats.Network.ServerStatsItem["Data Ping"]
+		if item and item.GetValue then
+			return item:GetValue()
+		end
+
+		return 0
+	end)
+
+	return ok and value or 0
 end
 
-
-local function safeGetFPS()
+function safeGetFPS()
     local ok, value = pcall(function()
         if workspace.GetRealPhysicsFPS then
             return workspace:GetRealPhysicsFPS()
@@ -857,14 +859,15 @@ local function safeGetFPS()
     return ok and value or 60
 end
 
-local function updateCurrentServerHeader()
-    pcall(function()
-        local ping = safeGetPing()
-        local fps = safeGetFPS()
-        local players = #game.Players:GetPlayers()
-        local maxPlayers = game.Players.MaxPlayers
-        local gameId = game.PlaceId
-        local serverId = game.JobId
+function updateCurrentServerHeader()
+	pcall(function()
+		local ping, fps, players, maxPlayers, gameId, serverId =
+			safeGetPing(),
+			safeGetFPS(),
+			#game.Players:GetPlayers(),
+			game.Players.MaxPlayers,
+			game.PlaceId,
+			game.JobId
 
         currentServerInfo.Text =
             "Ping: " .. math.floor(ping) ..
@@ -880,8 +883,6 @@ task.spawn(function()
         updateCurrentServerHeader()
     end
 end)
-
-
 
 -- Détection des Screen 
 
@@ -1676,7 +1677,7 @@ local versionLabel = Instance.new("TextLabel", mainFrame)
 versionLabel.Size = UDim2.new(0, 150, 0, 25)
 versionLabel.Position = UDim2.new(0, 10, 0, 8)
 versionLabel.BackgroundTransparency = 1
-versionLabel.Text = "v7.8"
+versionLabel.Text = "v7.9"
 versionLabel.Font = Enum.Font.Ubuntu
 versionLabel.TextSize = 16
 versionLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
@@ -2873,7 +2874,7 @@ Modules.print = function(color, text, size)
 	print(Text)
 end
 
-local version = "7.8"
+local version = "7.9"
 
 local translations = {
 	["fr"] = {
