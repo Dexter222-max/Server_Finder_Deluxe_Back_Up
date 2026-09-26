@@ -413,23 +413,40 @@ getgenv().HasScannedAll = false
 --         (Service/Info)
 -- ════════════════════════════════════════
 
-local HttpService = game:GetService("HttpService")
-local TeleportService = game:GetService("TeleportService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local CoreGui = game:GetService("CoreGui")
-local GuiService = game:GetService("GuiService")
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
-local LocalizationService = game:GetService("LocalizationService")
-local TweenService = game:GetService("TweenService")
-local VRService = game:GetService("VRService")
-local CaptureService = game:GetService("CaptureService")
-local SoundService = game:GetService("SoundService")
-local clipBoard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
-local setthreadidentity = setthreadidentity or (syn and syn.set_thread_identity) or syn_context_set or setthreadcontext
+Services = setmetatable({}, { 
+	__index = function(self, name) 
+		local success, service = pcall(function() 
+			return game:GetService(name) 
+		end) 
+ 
+		if success then 
+			rawset(self, name, service) 
+			return service 
+		end 
+ 
+		error("Invalid Service: " .. tostring(name)) 
+	end 
+}) 
+ 
+HttpService = (Services.HttpService) 
+TeleportService = (Services.TeleportService) 
+Players = (Services.Players) 
+LocalPlayer = (Players.LocalPlayer) 
+CoreGui = (Services.CoreGui) 
+GuiService = (Services.GuiService) 
+PlayerGui = (LocalPlayer:WaitForChild("PlayerGui")) 
+RobloxGui = (CoreGui:WaitForChild("RobloxGui")) 
+UserInputService = (Services.UserInputService) 
+RunService = (Services.RunService) 
+LocalizationService = (Services.LocalizationService) 
+TweenService = (Services.TweenService) 
+VRService = (Services.VRService) 
+CaptureService = (Services.CaptureService) 
+SoundService = (Services.SoundService) 
+Stats = (Services.Stats) 
+MarketplaceService = (Services.MarketplaceService) 
+clipBoard = (setclipboard) or (toclipboard) or (set_clipboard) or (Clipboard and Clipboard.set) 
+setthreadidentity = (setthreadidentity) or (syn and syn.set_thread_identity) or (syn_context_set) or (setthreadcontext)
 
 local function v8(v6)
     local v7 = false
@@ -789,25 +806,24 @@ if not screenGui.Parent then
     screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 end
 
-local mainFrame = Instance.new("Frame", screenGui)
-mainFrame.Name = "SFD_ProtectGui" .. tostring(math.random(100, 999)) 
+mainFrame = Instance.new("Frame", screenGui)
+mainFrame.Name = "SFD_ProtectGui" .. tostring(math.random(100, 999))
 mainFrame.Size = UDim2.new(0, 650, 0, 500)
 mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 mainFrame.BorderSizePixel = 0
-mainFrame.ZIndex = 5 
+mainFrame.ZIndex = 5
 
-local corner = Instance.new("UICorner")
+corner = Instance.new("UICorner")
 corner.Parent = mainFrame
 
-local headerFrame = Instance.new("Frame", mainFrame)
-headerFrame.Size = UDim2.new(1, -20, 0, 80) 
+headerFrame = Instance.new("Frame", mainFrame)
+headerFrame.Size = UDim2.new(1, -20, 0, 80)
 headerFrame.Position = UDim2.new(0, 10, 0, 50)
 headerFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 headerFrame.BorderSizePixel = 0
 headerFrame.ZIndex = 30
-
 headerFrame.Visible = false
 
 currentServerTitle = Instance.new("TextLabel", headerFrame)
