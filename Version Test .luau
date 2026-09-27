@@ -54,17 +54,17 @@ local Lighting = game:GetService("Lighting")
 local CoreGui = game:GetService("CoreGui")
 local LocalizationService = game:GetService("LocalizationService") 
 
-local gui = Instance.new("ScreenGui", game.CoreGui)
+gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Parent = CoreGui
 gui.IgnoreGuiInset = true
 gui.ResetOnSpawn = false
 
-local blur = Instance.new("BlurEffect")
+blur = Instance.new("BlurEffect")
 blur.Parent = Lighting
 blur.Size = 12
 
 
-local main = Instance.new("Frame")
+main = Instance.new("Frame")
 main.Parent = gui
 main.Size = UDim2.new(0, 420, 0, 410) 
 main.Position = UDim2.new(0.5, -210, 0.5, -205)
@@ -72,7 +72,7 @@ main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 main.BorderSizePixel = 0
 Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12)
 
-local title = Instance.new("TextLabel")
+title = Instance.new("TextLabel")
 title.Parent = main
 title.BackgroundTransparency = 1
 title.Size = UDim2.new(1, 0, 0, 50)
@@ -82,7 +82,7 @@ title.TextSize = 40
 title.TextColor3 = Color3.fromRGB(240, 240, 240)
 title.Text = "Server Finder Deluxe"
 
-local versionLabel = Instance.new("TextLabel")
+versionLabel = Instance.new("TextLabel")
 versionLabel.Parent = main
 versionLabel.BackgroundTransparency = 1
 versionLabel.Size = UDim2.new(1, 0, 0, 20)
@@ -92,7 +92,7 @@ versionLabel.TextSize = 16
 versionLabel.TextColor3 = Color3.fromRGB(210, 210, 210)
 versionLabel.Text = "Ultimate Server Scanner"
 
-local status = Instance.new("TextLabel")
+status = Instance.new("TextLabel")
 status.Parent = main
 status.BackgroundTransparency = 1
 status.Size = UDim2.new(1, 0, 0, 30)
@@ -102,7 +102,7 @@ status.TextSize = 18
 status.TextColor3 = Color3.fromRGB(200, 200, 200)
 status.Text = "Loading..."
 
-local percent = Instance.new("TextLabel")
+percent = Instance.new("TextLabel")
 percent.Parent = main
 percent.BackgroundTransparency = 1
 percent.Size = UDim2.new(1, 0, 0, 25)
@@ -112,7 +112,7 @@ percent.TextSize = 20
 percent.TextColor3 = Color3.fromRGB(200, 200, 200)
 percent.Text = "0%"
 
-local barBack = Instance.new("Frame")
+barBack = Instance.new("Frame")
 barBack.Parent = main
 barBack.Size = UDim2.new(0, 280, 0, 8)
 barBack.Position = UDim2.new(0.5, -140, 0, 165)
@@ -120,14 +120,14 @@ barBack.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 barBack.BorderSizePixel = 0
 Instance.new("UICorner", barBack).CornerRadius = UDim.new(0, 4)
 
-local bar = Instance.new("Frame")
+bar = Instance.new("Frame")
 bar.Parent = barBack
 bar.Size = UDim2.new(0, 0, 1, 0)
 bar.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 bar.BorderSizePixel = 0
 Instance.new("UICorner", bar).CornerRadius = UDim.new(0, 4)
 
-local CopyGithubSFD = Instance.new("TextButton")
+CopyGithubSFD = Instance.new("TextButton")
 CopyGithubSFD.Parent = barBack
 CopyGithubSFD.Size = UDim2.new(0, 120, 0, 25)
 CopyGithubSFD.Position = UDim2.new(0.5, -60, -3, -30)
@@ -153,10 +153,7 @@ CopyGithubSFD.MouseButton1Click:Connect(function()
     end)
 end)
 
----------------------------------------------------------------------------
--- 🌟 SECTION NOUVELLE : SYSTÈME DE TRADUCTION & TEXTE DE SÉCURITÉ
----------------------------------------------------------------------------
-local infoLabel = Instance.new("TextLabel")
+infoLabel = Instance.new("TextLabel")
 infoLabel.Parent = main
 infoLabel.BackgroundTransparency = 1
 infoLabel.Size = UDim2.new(0, 360, 0, 160)
@@ -196,7 +193,7 @@ infoLabel.Text = translations[userLanguage]
 
 
 
-local credit = Instance.new("TextLabel")
+credit = Instance.new("TextLabel")
 credit.Parent = main
 credit.BackgroundTransparency = 1
 credit.Size = UDim2.new(0, 200, 0, 20)
@@ -207,7 +204,7 @@ credit.TextColor3 = Color3.fromRGB(170, 170, 170)
 credit.TextXAlignment = Enum.TextXAlignment.Right
 credit.Text = "By MaxproGlitcher"
 
-local discord = Instance.new("TextLabel")
+discord = Instance.new("TextLabel")
 discord.Parent = main
 discord.BackgroundTransparency = 1
 discord.Size = UDim2.new(0, 220, 0, 20)
@@ -1096,15 +1093,13 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local function GetEasterDate(year)
-	local A, B, C, D, E, F, G
-
-	A = math.floor(year / 100)
-	B = math.floor((13 + 8 * A) / 25)
-	C = (15 - B + A - math.floor(A / 4)) % 30
-	D = (4 + A - math.floor(A / 4)) % 7
-	E = (19 * (year % 19) + C) % 30
-	F = (2 * (year % 4) + 4 * (year % 7) + 6 * E + D) % 7
-	G = 22 + E + F
+	local A = math.floor(year/100)
+	local B = math.floor((13+8*A)/25)
+	local C = (15-B+A-math.floor(A/4))%30
+	local D = (4+A-math.floor(A/4))%7
+	local E = (19*(year%19)+C)%30
+	local F = (2*(year%4)+4*(year%7)+6*E+D)%7
+	local G = 22 + E + F
 
 	if E == 29 and F == 6 then
 		return 4, 19
@@ -1680,7 +1675,7 @@ end)
 --    (Titre du Gui et la Version)
 -- ════════════════════════════════════════
 
-title = Instance.new("TextLabel", mainFrame)
+local title = Instance.new("TextLabel", mainFrame)
 title.Size = UDim2.new(1, 0, 0, 40)
 title.Position = UDim2.new(0, 5, 0, 0) 
 title.BackgroundTransparency = 1
@@ -1691,7 +1686,7 @@ title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.ZIndex = 12
 
 
-versionLabel = Instance.new("TextLabel", mainFrame)
+local versionLabel = Instance.new("TextLabel", mainFrame)
 versionLabel.Size = UDim2.new(0, 150, 0, 25)
 versionLabel.Position = UDim2.new(0, 10, 0, 8)
 versionLabel.BackgroundTransparency = 1
@@ -1708,7 +1703,7 @@ versionLabel.ZIndex = 16
 --               (Scroll Frame)
 -- ════════════════════════════════════════
 
-scrollFrame = Instance.new("ScrollingFrame", mainFrame)
+local scrollFrame = Instance.new("ScrollingFrame", mainFrame)
 scrollFrame.Position = UDim2.new(0, 10, 0, 140)
 scrollFrame.Size = UDim2.new(1, -20, 1, -150)
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
@@ -1718,13 +1713,13 @@ scrollFrame.BackgroundTransparency = 1
 scrollFrame.ClipsDescendants = true
 scrollFrame.ZIndex = 11
 
-layout = Instance.new("UIListLayout", scrollFrame)
+local layout = Instance.new("UIListLayout", scrollFrame)
 layout.SortOrder = Enum.SortOrder.LayoutOrder
 layout.Padding = UDim.new(0, 10)
 layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
 
-isScrolling = false
+local isScrolling = false
 
 scrollFrame.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseWheel or input.UserInputType == Enum.UserInputType.Touch then
@@ -2964,4 +2959,4 @@ Modules.print("Grey", msg.line, 20)
 Modules.print("Grey", msg.contact, 20)
 Modules.print("Grey", msg.line, 20)
 end)
---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
