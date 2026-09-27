@@ -54,17 +54,17 @@ local Lighting = game:GetService("Lighting")
 local CoreGui = game:GetService("CoreGui")
 local LocalizationService = game:GetService("LocalizationService") 
 
-gui = Instance.new("ScreenGui", game.CoreGui)
+local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Parent = CoreGui
 gui.IgnoreGuiInset = true
 gui.ResetOnSpawn = false
 
-blur = Instance.new("BlurEffect")
+local blur = Instance.new("BlurEffect")
 blur.Parent = Lighting
 blur.Size = 12
 
 
-main = Instance.new("Frame")
+local main = Instance.new("Frame")
 main.Parent = gui
 main.Size = UDim2.new(0, 420, 0, 410) 
 main.Position = UDim2.new(0.5, -210, 0.5, -205)
@@ -72,7 +72,7 @@ main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 main.BorderSizePixel = 0
 Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12)
 
-title = Instance.new("TextLabel")
+local title = Instance.new("TextLabel")
 title.Parent = main
 title.BackgroundTransparency = 1
 title.Size = UDim2.new(1, 0, 0, 50)
@@ -82,7 +82,7 @@ title.TextSize = 40
 title.TextColor3 = Color3.fromRGB(240, 240, 240)
 title.Text = "Server Finder Deluxe"
 
-versionLabel = Instance.new("TextLabel")
+local versionLabel = Instance.new("TextLabel")
 versionLabel.Parent = main
 versionLabel.BackgroundTransparency = 1
 versionLabel.Size = UDim2.new(1, 0, 0, 20)
@@ -92,7 +92,7 @@ versionLabel.TextSize = 16
 versionLabel.TextColor3 = Color3.fromRGB(210, 210, 210)
 versionLabel.Text = "Ultimate Server Scanner"
 
-status = Instance.new("TextLabel")
+local status = Instance.new("TextLabel")
 status.Parent = main
 status.BackgroundTransparency = 1
 status.Size = UDim2.new(1, 0, 0, 30)
@@ -102,7 +102,7 @@ status.TextSize = 18
 status.TextColor3 = Color3.fromRGB(200, 200, 200)
 status.Text = "Loading..."
 
-percent = Instance.new("TextLabel")
+local percent = Instance.new("TextLabel")
 percent.Parent = main
 percent.BackgroundTransparency = 1
 percent.Size = UDim2.new(1, 0, 0, 25)
@@ -112,7 +112,7 @@ percent.TextSize = 20
 percent.TextColor3 = Color3.fromRGB(200, 200, 200)
 percent.Text = "0%"
 
-barBack = Instance.new("Frame")
+local barBack = Instance.new("Frame")
 barBack.Parent = main
 barBack.Size = UDim2.new(0, 280, 0, 8)
 barBack.Position = UDim2.new(0.5, -140, 0, 165)
@@ -120,14 +120,14 @@ barBack.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 barBack.BorderSizePixel = 0
 Instance.new("UICorner", barBack).CornerRadius = UDim.new(0, 4)
 
-bar = Instance.new("Frame")
+local bar = Instance.new("Frame")
 bar.Parent = barBack
 bar.Size = UDim2.new(0, 0, 1, 0)
 bar.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 bar.BorderSizePixel = 0
 Instance.new("UICorner", bar).CornerRadius = UDim.new(0, 4)
 
-CopyGithubSFD = Instance.new("TextButton")
+local CopyGithubSFD = Instance.new("TextButton")
 CopyGithubSFD.Parent = barBack
 CopyGithubSFD.Size = UDim2.new(0, 120, 0, 25)
 CopyGithubSFD.Position = UDim2.new(0.5, -60, -3, -30)
@@ -153,7 +153,8 @@ CopyGithubSFD.MouseButton1Click:Connect(function()
     end)
 end)
 
-infoLabel = Instance.new("TextLabel")
+
+local infoLabel = Instance.new("TextLabel")
 infoLabel.Parent = main
 infoLabel.BackgroundTransparency = 1
 infoLabel.Size = UDim2.new(0, 360, 0, 160)
@@ -193,7 +194,7 @@ infoLabel.Text = translations[userLanguage]
 
 
 
-credit = Instance.new("TextLabel")
+local credit = Instance.new("TextLabel")
 credit.Parent = main
 credit.BackgroundTransparency = 1
 credit.Size = UDim2.new(0, 200, 0, 20)
@@ -204,7 +205,7 @@ credit.TextColor3 = Color3.fromRGB(170, 170, 170)
 credit.TextXAlignment = Enum.TextXAlignment.Right
 credit.Text = "By MaxproGlitcher"
 
-discord = Instance.new("TextLabel")
+local discord = Instance.new("TextLabel")
 discord.Parent = main
 discord.BackgroundTransparency = 1
 discord.Size = UDim2.new(0, 220, 0, 20)
@@ -803,27 +804,28 @@ if not screenGui.Parent then
     screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 end
 
-mainFrame = Instance.new("Frame", screenGui)
-mainFrame.Name = "SFD_ProtectGui" .. tostring(math.random(100, 999))
+local mainFrame = Instance.new("Frame", screenGui)
+mainFrame.Name = "SFD_ProtectGui" .. tostring(math.random(100, 999)) 
 mainFrame.Size = UDim2.new(0, 650, 0, 500)
 mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 mainFrame.BorderSizePixel = 0
-mainFrame.ZIndex = 5
+mainFrame.ZIndex = 5 
 
-corner = Instance.new("UICorner")
+local corner = Instance.new("UICorner")
 corner.Parent = mainFrame
 
-headerFrame = Instance.new("Frame", mainFrame)
-headerFrame.Size = UDim2.new(1, -20, 0, 80)
+local headerFrame = Instance.new("Frame", mainFrame)
+headerFrame.Size = UDim2.new(1, -20, 0, 80) 
 headerFrame.Position = UDim2.new(0, 10, 0, 50)
 headerFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
 headerFrame.BorderSizePixel = 0
 headerFrame.ZIndex = 30
+
 headerFrame.Visible = false
 
-currentServerTitle = Instance.new("TextLabel", headerFrame)
+local currentServerTitle = Instance.new("TextLabel", headerFrame)
 currentServerTitle.Size = UDim2.new(1, -20, 0, 18)
 currentServerTitle.Position = UDim2.new(0, 10, 0, 4)
 currentServerTitle.BackgroundTransparency = 1
@@ -834,7 +836,7 @@ currentServerTitle.TextXAlignment = Enum.TextXAlignment.Left
 currentServerTitle.Text = "Current Server"
 currentServerTitle.ZIndex = 30
 
-currentServerInfo = Instance.new("TextLabel", headerFrame)
+local currentServerInfo = Instance.new("TextLabel", headerFrame)
 currentServerInfo.Size = UDim2.new(1, -20, 0, 55)
 currentServerInfo.Position = UDim2.new(0, 10, 0, 22)
 currentServerInfo.BackgroundTransparency = 1
@@ -847,22 +849,20 @@ currentServerInfo.ZIndex = 30
 currentServerInfo.TextWrapped = true
 
 
-
-function safeGetPing()
-	local stats, ok, value, item = game:GetService("Stats"), nil, nil, nil
-    ok, value = pcall(function()
-		item = stats.Network.ServerStatsItem["Data Ping"]
-		if item and item.GetValue then
-			return item:GetValue()
-		end
-
-		return 0
-	end)
-
-	return ok and value or 0
+local function safeGetPing()
+    local stats = game:GetService("Stats")
+    local ok, value = pcall(function()
+        local item = stats.Network.ServerStatsItem["Data Ping"]
+        if item and item.GetValue then
+            return item:GetValue()
+        end
+        return 0
+    end)
+    return ok and value or 0
 end
 
-function safeGetFPS()
+
+local function safeGetFPS()
     local ok, value = pcall(function()
         if workspace.GetRealPhysicsFPS then
             return workspace:GetRealPhysicsFPS()
@@ -872,15 +872,14 @@ function safeGetFPS()
     return ok and value or 60
 end
 
-function updateCurrentServerHeader()
-	pcall(function()
-		local ping, fps, players, maxPlayers, gameId, serverId =
-			safeGetPing(),
-			safeGetFPS(),
-			#game.Players:GetPlayers(),
-			game.Players.MaxPlayers,
-			game.PlaceId,
-			game.JobId
+local function updateCurrentServerHeader()
+    pcall(function()
+        local ping = safeGetPing()
+        local fps = safeGetFPS()
+        local players = #game.Players:GetPlayers()
+        local maxPlayers = game.Players.MaxPlayers
+        local gameId = game.PlaceId
+        local serverId = game.JobId
 
         currentServerInfo.Text =
             "Ping: " .. math.floor(ping) ..
@@ -896,6 +895,8 @@ task.spawn(function()
         updateCurrentServerHeader()
     end
 end)
+
+
 
 -- Détection des Screen 
 
@@ -2959,4 +2960,4 @@ Modules.print("Grey", msg.line, 20)
 Modules.print("Grey", msg.contact, 20)
 Modules.print("Grey", msg.line, 20)
 end)
----------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
