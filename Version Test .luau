@@ -1680,7 +1680,7 @@ end)
 --    (Titre du Gui et la Version)
 -- ════════════════════════════════════════
 
-local title = Instance.new("TextLabel", mainFrame)
+title = Instance.new("TextLabel", mainFrame)
 title.Size = UDim2.new(1, 0, 0, 40)
 title.Position = UDim2.new(0, 5, 0, 0) 
 title.BackgroundTransparency = 1
@@ -1691,7 +1691,7 @@ title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.ZIndex = 12
 
 
-local versionLabel = Instance.new("TextLabel", mainFrame)
+versionLabel = Instance.new("TextLabel", mainFrame)
 versionLabel.Size = UDim2.new(0, 150, 0, 25)
 versionLabel.Position = UDim2.new(0, 10, 0, 8)
 versionLabel.BackgroundTransparency = 1
@@ -2964,4 +2964,4 @@ Modules.print("Grey", msg.line, 20)
 Modules.print("Grey", msg.contact, 20)
 Modules.print("Grey", msg.line, 20)
 end)
----------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
