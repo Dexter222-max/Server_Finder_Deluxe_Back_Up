@@ -153,9 +153,7 @@ CopyGithubSFD.MouseButton1Click:Connect(function()
     end)
 end)
 
----------------------------------------------------------------------------
--- 🌟 SECTION NOUVELLE : SYSTÈME DE TRADUCTION & TEXTE DE SÉCURITÉ
----------------------------------------------------------------------------
+
 local infoLabel = Instance.new("TextLabel")
 infoLabel.Parent = main
 infoLabel.BackgroundTransparency = 1
@@ -413,23 +411,40 @@ getgenv().HasScannedAll = false
 --         (Service/Info)
 -- ════════════════════════════════════════
 
-local HttpService = game:GetService("HttpService")
-local TeleportService = game:GetService("TeleportService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local CoreGui = game:GetService("CoreGui")
-local GuiService = game:GetService("GuiService")
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-local RobloxGui = CoreGui:WaitForChild("RobloxGui")
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
-local LocalizationService = game:GetService("LocalizationService")
-local TweenService = game:GetService("TweenService")
-local VRService = game:GetService("VRService")
-local CaptureService = game:GetService("CaptureService")
-local SoundService = game:GetService("SoundService")
-local clipBoard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
-local setthreadidentity = setthreadidentity or (syn and syn.set_thread_identity) or syn_context_set or setthreadcontext
+Services = setmetatable({}, { 
+	__index = function(self, name) 
+		local success, service = pcall(function() 
+			return game:GetService(name) 
+		end) 
+ 
+		if success then 
+			rawset(self, name, service) 
+			return service 
+		end 
+ 
+		error("Invalid Service: " .. tostring(name)) 
+	end 
+}) 
+ 
+HttpService = (Services.HttpService) 
+TeleportService = (Services.TeleportService) 
+Players = (Services.Players) 
+LocalPlayer = (Players.LocalPlayer) 
+CoreGui = (Services.CoreGui) 
+GuiService = (Services.GuiService) 
+PlayerGui = (LocalPlayer:WaitForChild("PlayerGui")) 
+RobloxGui = (CoreGui:WaitForChild("RobloxGui")) 
+UserInputService = (Services.UserInputService) 
+RunService = (Services.RunService) 
+LocalizationService = (Services.LocalizationService) 
+TweenService = (Services.TweenService) 
+VRService = (Services.VRService) 
+CaptureService = (Services.CaptureService) 
+SoundService = (Services.SoundService) 
+Stats = (Services.Stats) 
+MarketplaceService = (Services.MarketplaceService) 
+clipBoard = (setclipboard) or (toclipboard) or (set_clipboard) or (Clipboard and Clipboard.set) 
+setthreadidentity = (setthreadidentity) or (syn and syn.set_thread_identity) or (syn_context_set) or (setthreadcontext)
 
 local function v8(v6)
     local v7 = false
