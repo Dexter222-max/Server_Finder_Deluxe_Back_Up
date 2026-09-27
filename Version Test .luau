@@ -153,9 +153,6 @@ CopyGithubSFD.MouseButton1Click:Connect(function()
     end)
 end)
 
----------------------------------------------------------------------------
--- 🌟 SECTION NOUVELLE : SYSTÈME DE TRADUCTION & TEXTE DE SÉCURITÉ
----------------------------------------------------------------------------
 local infoLabel = Instance.new("TextLabel")
 infoLabel.Parent = main
 infoLabel.BackgroundTransparency = 1
