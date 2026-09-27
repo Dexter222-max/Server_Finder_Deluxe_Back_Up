@@ -1096,15 +1096,13 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local function GetEasterDate(year)
-	local A, B, C, D, E, F, G
-
-	A = math.floor(year / 100)
-	B = math.floor((13 + 8 * A) / 25)
-	C = (15 - B + A - math.floor(A / 4)) % 30
-	D = (4 + A - math.floor(A / 4)) % 7
-	E = (19 * (year % 19) + C) % 30
-	F = (2 * (year % 4) + 4 * (year % 7) + 6 * E + D) % 7
-	G = 22 + E + F
+	local A = math.floor(year/100)
+	local B = math.floor((13+8*A)/25)
+	local C = (15-B+A-math.floor(A/4))%30
+	local D = (4+A-math.floor(A/4))%7
+	local E = (19*(year%19)+C)%30
+	local F = (2*(year%4)+4*(year%7)+6*E+D)%7
+	local G = 22 + E + F
 
 	if E == 29 and F == 6 then
 		return 4, 19
@@ -1708,7 +1706,7 @@ versionLabel.ZIndex = 16
 --               (Scroll Frame)
 -- ════════════════════════════════════════
 
-scrollFrame = Instance.new("ScrollingFrame", mainFrame)
+local scrollFrame = Instance.new("ScrollingFrame", mainFrame)
 scrollFrame.Position = UDim2.new(0, 10, 0, 140)
 scrollFrame.Size = UDim2.new(1, -20, 1, -150)
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
@@ -1718,13 +1716,13 @@ scrollFrame.BackgroundTransparency = 1
 scrollFrame.ClipsDescendants = true
 scrollFrame.ZIndex = 11
 
-layout = Instance.new("UIListLayout", scrollFrame)
+local layout = Instance.new("UIListLayout", scrollFrame)
 layout.SortOrder = Enum.SortOrder.LayoutOrder
 layout.Padding = UDim.new(0, 10)
 layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
 
-isScrolling = false
+local isScrolling = false
 
 scrollFrame.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseWheel or input.UserInputType == Enum.UserInputType.Touch then
