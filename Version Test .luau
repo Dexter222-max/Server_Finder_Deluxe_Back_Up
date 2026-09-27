@@ -153,6 +153,9 @@ CopyGithubSFD.MouseButton1Click:Connect(function()
     end)
 end)
 
+---------------------------------------------------------------------------
+-- 🌟 SECTION NOUVELLE : SYSTÈME DE TRADUCTION & TEXTE DE SÉCURITÉ
+---------------------------------------------------------------------------
 local infoLabel = Instance.new("TextLabel")
 infoLabel.Parent = main
 infoLabel.BackgroundTransparency = 1
@@ -1093,13 +1096,15 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local function GetEasterDate(year)
-	local A = math.floor(year/100)
-	local B = math.floor((13+8*A)/25)
-	local C = (15-B+A-math.floor(A/4))%30
-	local D = (4+A-math.floor(A/4))%7
-	local E = (19*(year%19)+C)%30
-	local F = (2*(year%4)+4*(year%7)+6*E+D)%7
-	local G = 22 + E + F
+	local A, B, C, D, E, F, G
+
+	A = math.floor(year / 100)
+	B = math.floor((13 + 8 * A) / 25)
+	C = (15 - B + A - math.floor(A / 4)) % 30
+	D = (4 + A - math.floor(A / 4)) % 7
+	E = (19 * (year % 19) + C) % 30
+	F = (2 * (year % 4) + 4 * (year % 7) + 6 * E + D) % 7
+	G = 22 + E + F
 
 	if E == 29 and F == 6 then
 		return 4, 19
@@ -1675,7 +1680,7 @@ end)
 --    (Titre du Gui et la Version)
 -- ════════════════════════════════════════
 
-local title = Instance.new("TextLabel", mainFrame)
+title = Instance.new("TextLabel", mainFrame)
 title.Size = UDim2.new(1, 0, 0, 40)
 title.Position = UDim2.new(0, 5, 0, 0) 
 title.BackgroundTransparency = 1
@@ -1686,7 +1691,7 @@ title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.ZIndex = 12
 
 
-local versionLabel = Instance.new("TextLabel", mainFrame)
+versionLabel = Instance.new("TextLabel", mainFrame)
 versionLabel.Size = UDim2.new(0, 150, 0, 25)
 versionLabel.Position = UDim2.new(0, 10, 0, 8)
 versionLabel.BackgroundTransparency = 1
@@ -1703,7 +1708,7 @@ versionLabel.ZIndex = 16
 --               (Scroll Frame)
 -- ════════════════════════════════════════
 
-local scrollFrame = Instance.new("ScrollingFrame", mainFrame)
+scrollFrame = Instance.new("ScrollingFrame", mainFrame)
 scrollFrame.Position = UDim2.new(0, 10, 0, 140)
 scrollFrame.Size = UDim2.new(1, -20, 1, -150)
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
@@ -1713,13 +1718,13 @@ scrollFrame.BackgroundTransparency = 1
 scrollFrame.ClipsDescendants = true
 scrollFrame.ZIndex = 11
 
-local layout = Instance.new("UIListLayout", scrollFrame)
+layout = Instance.new("UIListLayout", scrollFrame)
 layout.SortOrder = Enum.SortOrder.LayoutOrder
 layout.Padding = UDim.new(0, 10)
 layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
 
-local isScrolling = false
+isScrolling = false
 
 scrollFrame.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseWheel or input.UserInputType == Enum.UserInputType.Touch then
