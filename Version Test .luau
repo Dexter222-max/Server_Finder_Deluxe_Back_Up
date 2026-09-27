@@ -1845,227 +1845,226 @@ end
 -- ════════════════════════════════════════
 
  
-local function formatTime()
-	local success, result = pcall(function()
-		local dt = DateTime.now():ToLocalTime()
-		local hour = dt.Hour
-		local ampm = "AM"
-
-		if hour >= 12 then
-			ampm = "PM"
-		end
-
-		hour = hour % 12
-		if hour == 0 then
-			hour = 12
-		end
-
-		return string.format("%02d:%02d %s", hour, dt.Minute, ampm)
-	end)
-
-	if success then
-		return result
-	else
-		warn("formatTime failed: unable to get the local time.")
-		return "N/A"
-	end
-end
-
-
-
-local function CreateServerFrame(server)
-	local serverFrame = Instance.new("Frame", scrollFrame)
-	serverFrame.Size = UDim2.new(1, 0, 0, 120)
-	serverFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-	serverFrame.BorderSizePixel = 0
-	serverFrame.ZIndex = 11
-
-	server.timeObtained = server.timeObtained or formatTime()
-
-	
-	local infoLabel = Instance.new("TextLabel", serverFrame)
-	infoLabel.Size = UDim2.new(0, 300, 0, 60)
-	infoLabel.Position = UDim2.new(0, 10, 0, 10)
-	infoLabel.BackgroundTransparency = 1
-	infoLabel.TextWrapped = true
-	infoLabel.TextXAlignment = Enum.TextXAlignment.Left
-	infoLabel.TextYAlignment = Enum.TextYAlignment.Top
-	infoLabel.Font = Enum.Font.Ubuntu
-	infoLabel.TextSize = 16
-	infoLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-	infoLabel.ZIndex = 12
-	
-	local ping = server.ping or 0
-	local players = server.playing or 0
-	local maxPlayers = server.maxPlayers or 0
-	local rawFps = tonumber(server.fps) or 0
-    local fps = string.format("%.1f", rawFps)  
-
-	
-	local quality, qualityColor
-	pcall(function()
-		quality = "Good"
-		qualityColor = Color3.fromRGB(0, 255, 0)
-
-		if ping > 250 or players >= maxPlayers then
-			quality = "Bad"
-			qualityColor = Color3.fromRGB(255, 60, 60)
-		elseif ping > 150 then
-			quality = "Medium"
-			qualityColor = Color3.fromRGB(255, 170, 0)
-		end
-	end)
-
-
-	infoLabel.Text =
-		"Ping : " .. (ping > 0 and ping or "N/A") ..
-		"\nFPS : " .. fps ..
-		"\nPlayers : " .. players .. "/" .. maxPlayers ..
-		"\nServer Quality : " .. quality
-
-	infoLabel.TextColor3 = qualityColor
-
-	local totalPlayersLabel = Instance.new("TextLabel", serverFrame)
-    totalPlayersLabel.Size = UDim2.new(0, 300, 0, 20)
-    totalPlayersLabel.Position = UDim2.new(0, 10, 0, 58)
-    totalPlayersLabel.BackgroundTransparency = 1
-    totalPlayersLabel.TextWrapped = true
-    totalPlayersLabel.TextXAlignment = Enum.TextXAlignment.Left
-    totalPlayersLabel.Font = Enum.Font.Ubuntu
-    totalPlayersLabel.TextSize = 14
-    totalPlayersLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    totalPlayersLabel.Text = "Total Servers Players : " .. tostring(cachedTotalPlayers)
-    totalPlayersLabel.ZIndex = 12
-
-	
-	local placeIdLabel = Instance.new("TextLabel", serverFrame)
-	placeIdLabel.Size = UDim2.new(0, 300, 0, 20)
-	placeIdLabel.Position = UDim2.new(0, 10, 0, 76)
-	placeIdLabel.BackgroundTransparency = 1
-	placeIdLabel.TextWrapped = true
-	placeIdLabel.TextXAlignment = Enum.TextXAlignment.Left
-	placeIdLabel.TextYAlignment = Enum.TextYAlignment.Top
-	placeIdLabel.Font = Enum.Font.Ubuntu
-	placeIdLabel.TextSize = 14
-	placeIdLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-	placeIdLabel.Text = "Game ID : " .. tostring(game.PlaceId)
-	placeIdLabel.ZIndex = 12
-
-	
-	local idLabel = Instance.new("TextLabel", serverFrame)
-	idLabel.Size = UDim2.new(0, 300, 0, 20)
-	idLabel.Position = UDim2.new(0, 10, 0, 94)
-	idLabel.BackgroundTransparency = 1
-	idLabel.TextWrapped = true
-	idLabel.TextXAlignment = Enum.TextXAlignment.Left
-	idLabel.TextYAlignment = Enum.TextYAlignment.Top
-	idLabel.Font = Enum.Font.Ubuntu
-	idLabel.TextSize = 14
-	idLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-	idLabel.Text = "ID : " .. server.id
-	idLabel.ZIndex = 12
-
-	
-	local joinButton = Instance.new("TextButton", serverFrame)
-	joinButton.Size = UDim2.new(0, 100, 0, 40)
-	joinButton.Position = UDim2.new(1, -110, 0.5, -20)
-	joinButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-	joinButton.Text = "Join"
-	joinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-	joinButton.Font = Enum.Font.Ubuntu
-	joinButton.TextSize = 18
-	joinButton.ZIndex = 12
-
-	local clickSound = Instance.new("Sound", joinButton)
-	clickSound.SoundId = "rbxassetid://9120093264"
-	clickSound.Volume = 1
-	clickSound.PlayOnRemove = false
-
-	joinButton.MouseButton1Click:Connect(function()
-		local soundOk, soundErr = pcall(function()
-			clickSound:Play()
-		end)
-		if not soundOk then
-			warn("Failed to play click sound Join:", soundErr)
-		end
-
-		local ok, err = pcall(function()
-			TeleportService:TeleportToPlaceInstance(game.PlaceId, server.id, LocalPlayer)
-		end)
-		if not ok then
-			warn("An error occurred on the join button. Please try again.", err)
-		end
-	end)
-
-       server.timeObtained = server.timeObtained or formatTime()
-    
-        
-    local timeLabel = Instance.new("TextLabel", serverFrame)
-    timeLabel.Size = UDim2.new(0, 100, 0, 20)
-    timeLabel.Position = UDim2.new(1, -110, 0.5, -50) 
-    timeLabel.BackgroundTransparency = 1
-    timeLabel.TextXAlignment = Enum.TextXAlignment.Center
-    timeLabel.Font = Enum.Font.Ubuntu
-    timeLabel.TextSize = 14
-    timeLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
-    timeLabel.ZIndex = 12
-    timeLabel.Text = server.timeObtained
-
-        
-	local copyJoinButton = Instance.new("TextButton", serverFrame)
-	copyJoinButton.Size = UDim2.new(0, 100, 0, 30)
-	copyJoinButton.Position = UDim2.new(1, -110, 0.5, 25)
-	copyJoinButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-	copyJoinButton.Text = "Copy Join"
-	copyJoinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-	copyJoinButton.Font = Enum.Font.Ubuntu
-	copyJoinButton.TextSize = 16
-	copyJoinButton.ZIndex = 12
-
-	local clickSoundCopy = Instance.new("Sound", copyJoinButton)
-	clickSoundCopy.SoundId = "rbxassetid://9120093264"
-	clickSoundCopy.Volume = 1
-	clickSoundCopy.PlayOnRemove = false
-
-	copyJoinButton.MouseButton1Click:Connect(function()
-		local soundOk, soundErr = pcall(function()
-			clickSoundCopy:Play()
-		end)
-		if not soundOk then
-			warn("Failed to play click sound CopyJoin:", soundErr)
-		end
-
-		local ok, err = pcall(function()
-			local joinCommand = 'Roblox.GameLauncher.joinGameInstance(' .. game.PlaceId .. ', "' .. server.id .. '")'
-			setclipboard(joinCommand)
-		end)
-		if not ok then
-			warn("An error occurred on the copy join button. Please try again.", err)
-		end
-	end)
-
-
-	local bestLatencyBtn = Instance.new("TextButton", serverFrame)
-    bestLatencyBtn.Size = UDim2.new(0, 100, 0, 30)
-    bestLatencyBtn.Position = UDim2.new(1, -220, 0.5, 25)
-    bestLatencyBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-    bestLatencyBtn.Text = "Best Latency"
-    bestLatencyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    bestLatencyBtn.Font = Enum.Font.Ubuntu
-    bestLatencyBtn.TextSize = 14
-    bestLatencyBtn.ZIndex = 12
-
-    bestLatencyBtn.MouseButton1Click:Connect(function()
-    local ok, err = pcall(function()
-        refreshServers("BestLatency")
-    end)
-
-    if not ok then
-        warn("Error while searching for Best Latency:", err)
-    end
-end)
-
-	table.insert(serverFrames, serverFrame)
+function formatTime() 
+	success, result = pcall(function() 
+		dt = DateTime.now():ToLocalTime() 
+		hour = dt.Hour 
+		ampm = "AM" 
+ 
+		if hour >= 12 then 
+			ampm = "PM" 
+		end 
+ 
+		hour = hour % 12 
+		if hour == 0 then 
+			hour = 12 
+		end 
+ 
+		return string.format("%02d:%02d %s", hour, dt.Minute, ampm) 
+	end) 
+ 
+	if success then 
+		return result 
+	else 
+		warn("formatTime failed: unable to get the local time.") 
+		return "N/A" 
+	end 
+end 
+ 
+ 
+ 
+function CreateServerFrame(server) 
+	serverFrame = Instance.new("Frame", scrollFrame) 
+	serverFrame.Size = UDim2.new(1, 0, 0, 120) 
+	serverFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40) 
+	serverFrame.BorderSizePixel = 0 
+	serverFrame.ZIndex = 11 
+ 
+	server.timeObtained = server.timeObtained or formatTime() 
+ 
+	 
+	infoLabel = Instance.new("TextLabel", serverFrame) 
+	infoLabel.Size = UDim2.new(0, 300, 0, 60) 
+	infoLabel.Position = UDim2.new(0, 10, 0, 10) 
+	infoLabel.BackgroundTransparency = 1 
+	infoLabel.TextWrapped = true 
+	infoLabel.TextXAlignment = Enum.TextXAlignment.Left 
+	infoLabel.TextYAlignment = Enum.TextYAlignment.Top 
+	infoLabel.Font = Enum.Font.Ubuntu 
+	infoLabel.TextSize = 16 
+	infoLabel.TextColor3 = Color3.fromRGB(255, 255, 255) 
+	infoLabel.ZIndex = 12 
+	 
+	ping = server.ping or 0 
+	players = server.playing or 0 
+	maxPlayers = server.maxPlayers or 0 
+	rawFps = tonumber(server.fps) or 0 
+    fps = string.format("%.1f", rawFps)   
+ 
+	 
+	quality, qualityColor = nil, nil
+	pcall(function() 
+		quality = "Good" 
+		qualityColor = Color3.fromRGB(0, 255, 0) 
+ 
+		if ping > 250 or players >= maxPlayers then 
+			quality = "Bad" 
+			qualityColor = Color3.fromRGB(255, 60, 60) 
+		elseif ping > 150 then 
+			quality = "Medium" 
+			qualityColor = Color3.fromRGB(255, 170, 0) 
+		end 
+	end) 
+ 
+ 
+	infoLabel.Text = 
+		"Ping : " .. (ping > 0 and ping or "N/A") .. 
+		"\nFPS : " .. fps .. 
+		"\nPlayers : " .. players .. "/" .. maxPlayers .. 
+		"\nServer Quality : " .. quality 
+ 
+	infoLabel.TextColor3 = qualityColor 
+ 
+	totalPlayersLabel = Instance.new("TextLabel", serverFrame) 
+    totalPlayersLabel.Size = UDim2.new(0, 300, 0, 20) 
+    totalPlayersLabel.Position = UDim2.new(0, 10, 0, 58) 
+    totalPlayersLabel.BackgroundTransparency = 1 
+    totalPlayersLabel.TextWrapped = true 
+    totalPlayersLabel.TextXAlignment = Enum.TextXAlignment.Left 
+    totalPlayersLabel.Font = Enum.Font.Ubuntu 
+    totalPlayersLabel.TextSize = 14 
+    totalPlayersLabel.TextColor3 = Color3.fromRGB(200, 200, 200) 
+    totalPlayersLabel.Text = "Total Servers Players : " .. tostring(cachedTotalPlayers) 
+    totalPlayersLabel.ZIndex = 12 
+ 
+	 
+	placeIdLabel = Instance.new("TextLabel", serverFrame) 
+	placeIdLabel.Size = UDim2.new(0, 300, 0, 20) 
+	placeIdLabel.Position = UDim2.new(0, 10, 0, 76) 
+	placeIdLabel.BackgroundTransparency = 1 
+	placeIdLabel.TextWrapped = true 
+	placeIdLabel.TextXAlignment = Enum.TextXAlignment.Left 
+	placeIdLabel.TextYAlignment = Enum.TextYAlignment.Top 
+	placeIdLabel.Font = Enum.Font.Ubuntu 
+	placeIdLabel.TextSize = 14 
+	placeIdLabel.TextColor3 = Color3.fromRGB(200, 200, 200) 
+	placeIdLabel.Text = "Game ID : " .. tostring(game.PlaceId) 
+	placeIdLabel.ZIndex = 12 
+ 
+	 
+	idLabel = Instance.new("TextLabel", serverFrame) 
+	idLabel.Size = UDim2.new(0, 300, 0, 20) 
+	idLabel.Position = UDim2.new(0, 10, 0, 94) 
+	idLabel.BackgroundTransparency = 1 
+	idLabel.TextWrapped = true 
+	idLabel.TextXAlignment = Enum.TextXAlignment.Left 
+	idLabel.TextYAlignment = Enum.TextYAlignment.Top 
+	idLabel.Font = Enum.Font.Ubuntu 
+	idLabel.TextSize = 14 
+	idLabel.TextColor3 = Color3.fromRGB(200, 200, 200) 
+	idLabel.Text = "ID : " .. server.id 
+	idLabel.ZIndex = 12 
+ 
+	 
+	joinButton = Instance.new("TextButton", serverFrame) 
+	joinButton.Size = UDim2.new(0, 100, 0, 40) 
+	joinButton.Position = UDim2.new(1, -110, 0.5, -20) 
+	joinButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60) 
+	joinButton.Text = "Join" 
+	joinButton.TextColor3 = Color3.fromRGB(255, 255, 255) 
+	joinButton.Font = Enum.Font.Ubuntu 
+	joinButton.TextSize = 18 
+	joinButton.ZIndex = 12 
+ 
+	clickSound = Instance.new("Sound", joinButton) 
+	clickSound.SoundId = "rbxassetid://9120093264" 
+	clickSound.Volume = 1 
+	clickSound.PlayOnRemove = false 
+ 
+	joinButton.MouseButton1Click:Connect(function() 
+		soundOk, soundErr = pcall(function() 
+			clickSound:Play() 
+		end) 
+		if not soundOk then 
+			warn("Failed to play click sound Join:", soundErr) 
+		end 
+ 
+		ok, err = pcall(function() 
+			TeleportService:TeleportToPlaceInstance(game.PlaceId, server.id, LocalPlayer) 
+		end) 
+		if not ok then 
+			warn("An error occurred on the join button. Please try again.", err) 
+		end 
+	end) 
+ 
+    server.timeObtained = server.timeObtained or formatTime() 
+     
+    timeLabel = Instance.new("TextLabel", serverFrame) 
+    timeLabel.Size = UDim2.new(0, 100, 0, 20) 
+    timeLabel.Position = UDim2.new(1, -110, 0.5, -50)  
+    timeLabel.BackgroundTransparency = 1 
+    timeLabel.TextXAlignment = Enum.TextXAlignment.Center 
+    timeLabel.Font = Enum.Font.Ubuntu 
+    timeLabel.TextSize = 14 
+    timeLabel.TextColor3 = Color3.fromRGB(180, 180, 180) 
+    timeLabel.ZIndex = 12 
+    timeLabel.Text = server.timeObtained 
+ 
+         
+	copyJoinButton = Instance.new("TextButton", serverFrame) 
+	copyJoinButton.Size = UDim2.new(0, 100, 0, 30) 
+	copyJoinButton.Position = UDim2.new(1, -110, 0.5, 25) 
+	copyJoinButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80) 
+	copyJoinButton.Text = "Copy Join" 
+	copyJoinButton.TextColor3 = Color3.fromRGB(255, 255, 255) 
+	copyJoinButton.Font = Enum.Font.Ubuntu 
+	copyJoinButton.TextSize = 16 
+	copyJoinButton.ZIndex = 12 
+ 
+	clickSoundCopy = Instance.new("Sound", copyJoinButton) 
+	clickSoundCopy.SoundId = "rbxassetid://9120093264" 
+	clickSoundCopy.Volume = 1 
+	clickSoundCopy.PlayOnRemove = false 
+ 
+	copyJoinButton.MouseButton1Click:Connect(function() 
+		soundOk, soundErr = pcall(function() 
+			clickSoundCopy:Play() 
+		end) 
+		if not soundOk then 
+			warn("Failed to play click sound CopyJoin:", soundErr) 
+		end 
+ 
+		ok, err = pcall(function() 
+			joinCommand = 'Roblox.GameLauncher.joinGameInstance(' .. game.PlaceId .. ', "' .. server.id .. '")' 
+			setclipboard(joinCommand) 
+		end) 
+		if not ok then 
+			warn("An error occurred on the copy join button. Please try again.", err) 
+		end 
+	end) 
+ 
+ 
+	bestLatencyBtn = Instance.new("TextButton", serverFrame) 
+    bestLatencyBtn.Size = UDim2.new(0, 100, 0, 30) 
+    bestLatencyBtn.Position = UDim2.new(1, -220, 0.5, 25) 
+    bestLatencyBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 60) 
+    bestLatencyBtn.Text = "Best Latency" 
+    bestLatencyBtn.TextColor3 = Color3.fromRGB(255, 255, 255) 
+    bestLatencyBtn.Font = Enum.Font.Ubuntu 
+    bestLatencyBtn.TextSize = 14 
+    bestLatencyBtn.ZIndex = 12 
+ 
+    bestLatencyBtn.MouseButton1Click:Connect(function() 
+    ok, err = pcall(function() 
+        refreshServers("BestLatency") 
+    end) 
+ 
+    if not ok then 
+        warn("Error while searching for Best Latency:", err) 
+    end 
+end 
+ 
+	table.insert(serverFrames, serverFrame) 
 end
 
 
