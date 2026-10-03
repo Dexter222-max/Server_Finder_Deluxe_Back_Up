@@ -1708,7 +1708,7 @@ bestLatencyBtn = Instance.new("TextButton")
 bestLatencyBtn.Parent = mainFrame
 bestLatencyBtn.AnchorPoint = Vector2.new(0.5,0.5)
 bestLatencyBtn.Size = UDim2.new(0, 100, 0, 25)
-bestLatencyBtn.Position = UDim2.new(1, -80, 0, 148)
+bestLatencyBtn.Position = UDim2.new(1, -78, 0, 133)
 
 bestLatencyBtn.BackgroundColor3 = Color3.fromRGB(60,60,60)
 bestLatencyBtn.BorderSizePixel = 0
