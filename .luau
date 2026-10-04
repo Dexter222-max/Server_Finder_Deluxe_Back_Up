@@ -1676,7 +1676,7 @@ end)
 --    (Titre du Gui et la Version)
 -- ════════════════════════════════════════
 
-local title = Instance.new("TextLabel", mainFrame)
+title = Instance.new("TextLabel", mainFrame)
 title.Size = UDim2.new(1, 0, 0, 40)
 title.Position = UDim2.new(0, 5, 0, 0) 
 title.BackgroundTransparency = 1
@@ -1687,16 +1687,49 @@ title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.ZIndex = 12
 
 
-local versionLabel = Instance.new("TextLabel", mainFrame)
+versionLabel = Instance.new("TextLabel", mainFrame)
 versionLabel.Size = UDim2.new(0, 150, 0, 25)
 versionLabel.Position = UDim2.new(0, 10, 0, 8)
 versionLabel.BackgroundTransparency = 1
-versionLabel.Text = "v7.9"
+versionLabel.Text = "v8.0"
 versionLabel.Font = Enum.Font.Ubuntu
 versionLabel.TextSize = 16
 versionLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
 versionLabel.TextXAlignment = Enum.TextXAlignment.Left
 versionLabel.ZIndex = 16
+
+--------------------------------------------------------------------------------------------------------------------
+
+-- ════════════════════════════════════════
+--    (Button bestLatencyBtn)
+-- ════════════════════════════════════════
+
+bestLatencyBtn = Instance.new("TextButton")
+bestLatencyBtn.Parent = mainFrame
+bestLatencyBtn.AnchorPoint = Vector2.new(0.5,0.5)
+bestLatencyBtn.Size = UDim2.new(0,100,0,30)
+bestLatencyBtn.Position = UDim2.new(1, -69, 0, 110)
+
+bestLatencyBtn.BackgroundColor3 = Color3.fromRGB(60,60,60)
+bestLatencyBtn.BorderSizePixel = 0
+bestLatencyBtn.Text = "Best Latency"
+bestLatencyBtn.Font = Enum.Font.Ubuntu
+bestLatencyBtn.TextSize = 14
+bestLatencyBtn.TextColor3 = Color3.fromRGB(255,255,255)
+bestLatencyBtn.ZIndex = 35
+
+bestCorner = Instance.new("UICorner")
+bestCorner.Parent = bestLatencyBtn
+
+bestLatencyBtn.MouseButton1Click:Connect(function()
+	local ok, err = pcall(function()
+		refreshServers("BestLatency")
+	end)
+
+	if not ok then
+		warn("Error while searching for Best Latency:", err)
+	end
+end)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -2039,27 +2072,6 @@ local function CreateServerFrame(server)
 			warn("An error occurred on the copy join button. Please try again.", err)
 		end
 	end)
-
-
-	local bestLatencyBtn = Instance.new("TextButton", serverFrame)
-    bestLatencyBtn.Size = UDim2.new(0, 100, 0, 30)
-    bestLatencyBtn.Position = UDim2.new(1, -220, 0.5, 25)
-    bestLatencyBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-    bestLatencyBtn.Text = "Best Latency"
-    bestLatencyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    bestLatencyBtn.Font = Enum.Font.Ubuntu
-    bestLatencyBtn.TextSize = 14
-    bestLatencyBtn.ZIndex = 12
-
-    bestLatencyBtn.MouseButton1Click:Connect(function()
-    local ok, err = pcall(function()
-        refreshServers("BestLatency")
-    end)
-
-    if not ok then
-        warn("Error while searching for Best Latency:", err)
-    end
-end)
 
 	table.insert(serverFrames, serverFrame)
 end
@@ -2793,6 +2805,12 @@ local function toggleGuiSize()
             maxPlayersBtn.Size = UDim2.new(0, 65, 0, 30)
             maxPlayersBtn.Position = UDim2.new(0.5, -235, 0.5, -224)
         end
+
+		if bestLatencyBtn then
+           bestLatencyBtn.AnchorPoint = Vector2.new(0.5, 0.5)
+           bestLatencyBtn.Size = UDim2.new(0, 100, 0, 30)
+           bestLatencyBtn.Position = UDim2.new(1, -69, 0, 110)
+       end
    
     else
         
@@ -2821,16 +2839,22 @@ local function toggleGuiSize()
             RejoinButton.Position = UDim2.new(0.5, 195, 0.5, -175)
         end
 
-       if  maxPlayersBtn then
+        if maxPlayersBtn then
             maxPlayersBtn.AnchorPoint = Vector2.new(0.5, 0.5)
             maxPlayersBtn.Size = UDim2.new(0, 45, 0, 24)
             maxPlayersBtn.Position = UDim2.new(0, 62, 0, 20)
         end
 
-      if  lowPlayersBtn then
+        if lowPlayersBtn then
            lowPlayersBtn.AnchorPoint = Vector2.new(0.5, 0.5)
            lowPlayersBtn.Size = UDim2.new(0, 45, 0, 24)
            lowPlayersBtn.Position = UDim2.new(0, 112, 0, 20)
+        end
+
+		if bestLatencyBtn then
+           bestLatencyBtn.AnchorPoint = Vector2.new(1, 0)
+           bestLatencyBtn.Size = UDim2.new(0, 100, 0, 30)
+           bestLatencyBtn.Position = UDim2.new(1, -15, 0, 85)
         end
 
         if resizeButton then
@@ -2888,7 +2912,7 @@ Modules.print = function(color, text, size)
 	print(Text)
 end
 
-local version = "7.9"
+local version = "8.0"
 
 local translations = {
 	["fr"] = {
