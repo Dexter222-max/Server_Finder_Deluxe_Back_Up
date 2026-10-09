@@ -6,7 +6,7 @@
 
 #      Hello Guys 👋🏻, Welcome too Server-Finder Deluxe
 
-#      Developer from 🍁Canada🍁 and .lua coding
+#      Developer from 🇵🇭 Philippines🇵🇭 and .lua coding
 
 # Script Loadstring Here ⬇️
 
@@ -16,7 +16,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxproGlitcher/Server
 
 ![image atl](https://github.com/MaxproGlitcher/Server_Finder_Deluxe_Back_Up/blob/ffc046878153d1f5c079e4480daa44206be6182c/Server%20Finder%20Deluxe%20Logo%20Back%20Up.png)
 
-# Server Finder Deluxe Back Up
+# Server Finder Deluxe 
 
 # Official New Version Announcement
 
