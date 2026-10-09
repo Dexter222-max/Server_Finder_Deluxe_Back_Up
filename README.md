@@ -2,35 +2,35 @@
 
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=Server_Finder_Deluxe_Back_Up&left_color=%232b2727&right_color=%23e76a04&height=30)
 
-#      Server_Finder_Deluxe_Back_Up💻📱
+#      Server_Finder_Dexx_Back_Up💻📱
 
-#      Hello Guys 👋🏻, Welcome too Server-Finder Deluxe
+#      Hello Guys 👋🏻, Welcome too Server-Finder Dexx
 
 #      Developer from 🇵🇭 Philippines🇵🇭 and .lua coding
 
 # Script Loadstring Here ⬇️
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxproGlitcher/Server_Finder_Deluxe/refs/heads/main/.luau"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxproGlitcher/Server_Finder_Dexx/refs/heads/main/.luau"))()
 ```
 
-![image atl](https://github.com/MaxproGlitcher/Server_Finder_Deluxe_Back_Up/blob/ffc046878153d1f5c079e4480daa44206be6182c/Server%20Finder%20Deluxe%20Logo%20Back%20Up.png)
+![image atl](https://github.com/M/Server_Finder_Dexx/blob/ffc046878153d1f5c079e4480daa44206be6182c/Server%20Finder%20Deluxe%20Logo%20Back%20Up.png)
 
-# Server Finder Deluxe 
+# Server Finder Dexx 
 
 # Official New Version Announcement
 
-The original **Server Finder Deluxe** project is now considered **discontinued**.
+The original **Server Finder Dexx** project is now considered **discontinued**.
 
 Due to fraudulent users creating fake and malicious versions using the **Server Finder Deluxe** name, these unauthorized versions were falsely associated with the original project. This caused confusion within the community and damaged the reputation of the original software.
 
 Because of these issues, the original GitHub repository was removed as a result of these fraudulent and malicious copies.
 
-To continue the project safely, **Server Finder Deluxe Back Up** is now the **only official and legitimate version** of Server Finder Deluxe.
+To continue the project safely, **Server Finder Dexx Back Up** is now the **only official and legitimate version** of Server Finder Deluxe.
 
 # About This Version
 
-#**Server Finder Deluxe Back Up** is the official continuation of the original project, maintained and developed by **MaxproGlitcher**.
+#**Server Finder Dexx Back Up** is the official continuation of the original project, maintained and developed by **M**.
 
 # This repository is the trusted source for:
 
